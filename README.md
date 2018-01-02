@@ -1,11 +1,12 @@
 # TF-IDF with MapReduce
 
-Initial input: folder path with some documents
-Final output: list of (word, doc) ranked by ascending value of TF-IDF
+- Initial input: folder path with some documents.
+- Final output: list of (word, doc) ranked by ascending value of TF-IDF
 
 The 4 MapReduce rounds are to be run successively.
 
 The highest scores are at the trail of this output. 
+
 Example for folder input_docs:
 ```
 5.235250603583094E-4	(dave, callwild.txt)
