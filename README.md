@@ -1,6 +1,6 @@
 # TF-IDF with MapReduce
 
-- Initial input: folder path with some documents.
+- Initial input: folder path with some documents
 - Final output: list of (word, doc) ranked by ascending value of TF-IDF
 
 The 4 MapReduce rounds are to be run successively.
