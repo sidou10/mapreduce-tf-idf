@@ -7,7 +7,7 @@ The 4 MapReduce rounds are to be run successively.
 
 The highest scores are at the trail of this output. 
 
-Example for folder input_docs:
+Example for input_docs folder:
 ```
 5.235250603583094E-4	(dave, callwild.txt)
 5.671521487215018E-4	(around, callwild.txt)
