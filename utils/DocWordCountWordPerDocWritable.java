@@ -1,9 +1,7 @@
 package cs.bigdata.Lab2.utils;
-
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
-
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.Writable;
@@ -18,7 +16,6 @@ public class DocWordCountWordPerDocWritable implements Writable{
 		super();
 		this.doc = doc;
 		this.wordCount = wordCount;
-		this.wordsPerDoc = wordsPerDoc;
 	}
 	
 	public DocWordCountWordPerDocWritable(Text doc, String wordCount, String wordsPerCount) {

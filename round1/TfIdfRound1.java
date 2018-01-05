@@ -1,34 +1,16 @@
 package cs.bigdata.Lab2.round1;
-
-import org.apache.hadoop.conf.Configuration;
-
 import org.apache.hadoop.conf.Configured;
-
 import org.apache.hadoop.fs.FileSystem;
-
 import org.apache.hadoop.fs.Path;
-
 import org.apache.hadoop.mapreduce.Job;
-
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
-
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
-
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
-
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
-
-import org.apache.hadoop.util.GenericOptionsParser;
-
 import org.apache.hadoop.util.Tool;
-
 import org.apache.hadoop.util.ToolRunner;
-
 import cs.bigdata.Lab2.utils.WordDoc;
-
-import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.IntWritable;
-
 
 public class TfIdfRound1 extends Configured implements Tool {
 
@@ -41,33 +23,35 @@ public class TfIdfRound1 extends Configured implements Tool {
         }
 
 
-        // Création d'un job en lui fournissant la configuration et une description textuelle de la tâche
+        // Job creation and description
         Job job = Job.getInstance(getConf());
         job.setJobName("TF-IDF Round 1");
 
 
-        // On précise les classes MyProgram, Map et Reduce
+        // Precise Driver, Mapper and Reducer
         job.setJarByClass(TfIdfRound1.class);
         job.setMapperClass(TfIdfRound1Mapper.class);
         job.setReducerClass(TfIdfRound2Reducer.class);
 
 
-        // Définition des types clé/valeur de notre problème
+        // Types of key/values for the mapper and the reducer
         job.setMapOutputKeyClass(WordDoc.class);
         job.setMapOutputValueClass(IntWritable.class);
         job.setOutputKeyClass(TextInputFormat.class);
         job.setOutputValueClass(TextOutputFormat.class);
+        
+        // Input and output file path
         Path inputFilePath = new Path(args[0]);
         Path outputFilePath = new Path(args[1]);
         
 
-     // On accepte une entrée recursive
+        // If folder, go into all documents
         FileInputFormat.setInputDirRecursive(job, true);
         FileInputFormat.addInputPath(job, inputFilePath);
         FileOutputFormat.setOutputPath(job, outputFilePath);
 
+        // If output already exists, delete it
         FileSystem fs = FileSystem.newInstance(getConf());
-
         if (fs.exists(outputFilePath)) {
             fs.delete(outputFilePath, true);
         }

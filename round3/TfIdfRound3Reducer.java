@@ -1,18 +1,12 @@
 package cs.bigdata.Lab2.round3;
 
-import org.apache.hadoop.mapreduce.Job;  
 import org.apache.hadoop.io.*;
 import org.apache.hadoop.mapreduce.Reducer;
-
 import cs.bigdata.Lab2.utils.DocWordCountWordPerDocWritable;
 import cs.bigdata.Lab2.utils.WcWpdDpwWritable;
 import cs.bigdata.Lab2.utils.WordDoc;
-
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
-import org.apache.hadoop.io.IntWritable;
-
 
 public class TfIdfRound3Reducer extends Reducer<Text, DocWordCountWordPerDocWritable, WordDoc, WcWpdDpwWritable> {
 

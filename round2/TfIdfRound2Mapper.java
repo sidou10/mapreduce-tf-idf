@@ -1,15 +1,8 @@
 package cs.bigdata.Lab2.round2;
-
-
-import org.apache.hadoop.mapreduce.Job;  
 import org.apache.hadoop.io.*;
 import org.apache.hadoop.mapreduce.Mapper;
-import org.apache.hadoop.mapreduce.lib.input.FileSplit;
-
 import cs.bigdata.Lab2.utils.WordWordCountWritable;
-
 import java.io.IOException;
-import java.util.StringTokenizer;
 
 public class TfIdfRound2Mapper extends Mapper<LongWritable, Text, Text, WordWordCountWritable> {
 	
