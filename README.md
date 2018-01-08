@@ -7,7 +7,7 @@ The 4 MapReduce rounds are to be run successively.
 
 The highest scores are at the trail of this output. 
 
-Example for input_docs folder:
+Example of output for input_docs folder:
 ```
 5.235250603583094E-4	(dave, callwild.txt)
 5.671521487215018E-4	(around, callwild.txt)
@@ -30,3 +30,21 @@ Example for input_docs folder:
 0.0024431169483387772	(dogs, callwild.txt)
 0.006827639187626952	(buck, callwild.txt)
 ```
+
+## Pipeline
+The classes in utils are the classes implementing the Writable interface. They are mandatory if we want to pass certain keys and values across mappers.
+
+
+- *Round 1: (Raw text) -> list of ([word, docName], wordCount)*
+  - Mapper: Raw text -> ([word, docName], 1)
+  - Reducer: ([word, docName], [1, 1, ...]) -> ([word, docName], wordCount)
+ 
+- *Round 2: ([word, docName], wordCount) -> ([word, docName], [wordCount, #wordsInDoc])*
+  - Mapper: ([word, docName], wordCount) -> (docName, [word, wordCount])
+  - Reducer: (docName, [[word1, wordCount1], [word2, wordCount2], ...]) -> ([word, docName], [wordCount, #wordsInDoc])
+  
+- *Round 3 : ([word, docName], [wordCount, #wordsInDoc]) -> ([word, docName], [wordCount, #wordsInDoc, #docsPerWord])*
+  - Mapper: ([word, docName], [wordCount, #wordsInDoc]) -> (word, [doc, wc, wpd])
+  - Reducer: (word, ([[doc1, wc1, wpd1], [doc2, wc2, wpd2], ...) -> ([word, docName], [wordCount, #wordsInDoc, #docsPerWord])
+
+- *Round 4: ([word, docName], [wordCount, #wordsInDoc, #docsPerWord]) -> ([word, docName], tf-idf)* (only a mapper)
