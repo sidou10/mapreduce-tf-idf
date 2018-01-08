@@ -31,7 +31,7 @@ public class TfIdfRound1 extends Configured implements Tool {
         // Precise Driver, Mapper and Reducer
         job.setJarByClass(TfIdfRound1.class);
         job.setMapperClass(TfIdfRound1Mapper.class);
-        job.setReducerClass(TfIdfRound2Reducer.class);
+        job.setReducerClass(TfIdfRound1Reducer.class);
 
 
         // Types of key/values for the mapper and the reducer

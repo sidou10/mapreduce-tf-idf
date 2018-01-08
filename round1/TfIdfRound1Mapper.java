@@ -10,20 +10,22 @@ public class TfIdfRound1Mapper extends Mapper<LongWritable, Text, WordDoc, IntWr
 	
 	private final static IntWritable one = new IntWritable(1);
 	private Text word = new Text();
-// Overriding of the map method
 @Override
 protected void map(LongWritable keyE, Text valE, Context context) throws IOException,InterruptedException
     {
+		// Put to lower case and remove all non-alpha characters
 		String line = valE.toString().toLowerCase().replaceAll("[^a-z ]", "");
 		
 		StringTokenizer tokenizer = new StringTokenizer(line);
 		
+		// Get the name of the document
 		FileSplit fileSplit = (FileSplit) context.getInputSplit();
 		String filename = fileSplit.getPath().getName();
 		
 		while(tokenizer.hasMoreTokens())
 		{
 			word.set(tokenizer.nextToken());
+			// Emit ([word, docName], 1)
 			context.write(new WordDoc(word,filename), one);
 		}
     }
